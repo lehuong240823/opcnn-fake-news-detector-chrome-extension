@@ -1,0 +1,33 @@
+{
+  "name": "fake-news-detector",
+  "version": "1.0.0",
+  "description": "A Chrome Extension to detect potential fake news.",
+  "license": "MIT",
+  "scripts": {
+    "install": "npm install",
+    "copy": "node copy-asset.js",
+    "build": "npm run copy && parcel build src/worker/service_worker.js --dist-dir dist/src/worker && parcel build src/index.js --dist-dir dist/src",
+    "watch": "npm run copy && parcel watch src/worker/service_worker.js --dist-dir dist/src/worker && parcel build src/index.js --dist-dir dist/src"
+  },
+  "dependencies": {
+    "@material/web": "^2.3.0",
+    "@tensorflow/tfjs": "^4.22.0",
+    "fs-extra": "^11.3.0",
+    "lemmatizer": "^0.0.1",
+    "natural": "^8.1.0",
+    "stopword": "^3.1.5"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "events": "^3.3.0",
+    "os-browserify": "^0.3.0",
+    "parcel": "^2.12.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "url": "^0.11.4",
+    "util": "^0.12.5",
+    "vm-browserify": "^1.1.2"
+  }
+}

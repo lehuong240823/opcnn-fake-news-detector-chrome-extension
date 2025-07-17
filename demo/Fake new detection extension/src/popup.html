@@ -1,0 +1,210 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Text Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/light.css">
+    <script type="module" src="index.js"></script>
+    <script type="module" src="popup.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            width: 320px;
+            min-height: 180px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Distribute space */
+        }
+
+        .container {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .settings-panel {
+            background: #f3f3f3;
+            border-left: 1px solid #ccc;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+
+            visibility: hidden;
+        }
+
+
+        .settings-open .main-content {
+            transition: right 0.3s;
+            animation: slideIn 0.3s ease;
+            visibility: hidden;
+        }
+
+        .settings-open .settings-panel {
+            transition: right 0.3s;
+            animation: slideIn 0.3s ease;
+            visibility: visible;
+
+        }
+
+        .header {
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .gear-icon {
+            float: inline-end;
+            cursor: pointer;
+        }
+
+        .arrow-back-icon {
+            float: inline-start;
+            cursor: pointer;
+        }
+
+        .text-display-box {
+            background-color: #e2e8f0;
+            padding: 12px;
+            border-radius: 8px;
+            min-height: 50px;
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 0.9em;
+            color: #1a202c;
+            word-break: break-word;
+            line-height: 1.4;
+            border: 1px solid #cbd5e0;
+        }
+
+        .result-box {
+            background-color: #dbeafe;
+            /* Blue-100 for results */
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 40px;
+            /*display: flex;*/
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.95em;
+            color: #1e40af;
+            /* Blue-800 */
+            font-weight: 600;
+            border: 1px solid #93c5fd;
+            /* Blue-300 border */
+        }
+
+        .label {
+            font-weight: bold;
+            color: #4a5568;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+            /* Center spinner */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                right: -220px;
+            }
+
+            to {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body id="popup">
+    <md-dialog id="m3Dialog" open>
+        <div slot="headline">Confirm Action</div>
+        <div slot="content">Are you sure you want to proceed?</div>
+        <md-text-button slot="action" id="dialogCancel">Cancel</md-text-button>
+        <md-filled-button slot="action" id="dialogOk">OK</md-filled-button>
+    </md-dialog>
+
+
+    <div class="main-content">
+        <div class="flex flex-col">
+            <div class="header">
+                Fake News Analysis Result
+                <span class="gear-icon" id="toggleSettings">&#9881;</span>
+            </div>
+            <div class="container">
+                <div class="flex flex-col">
+                    <label class="label" for="highlightedText">Highlighted Text:</label>
+                    <div id="highlightedText" class="text-display-box">
+                        <div class="loading-spinner"></div>
+                        <p class="mt-2 text-sm text-gray-700 text-center">Loading text...</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="label" for="result">Analysis Result:</label>
+                    <div id="result" class="result-box">
+                        <div class="loading-spinner"></div>
+                        <p class="mt-2 text-sm text-gray-700 text-center">Analyzing...</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="settings-panel" id="settingsPanel">
+        <div class="header">
+            <span class="arrow-back-icon" id="toggleBack">&#8592;</span>
+            Settings
+        </div>
+
+        <div class="container">
+            <div class="flex flex-col">
+                <label class="label">
+                    Min vocab length:
+                    <div class="flex flex-row">
+                        <input type="range" id="vocabSlider" min="10" max="100">
+                        <input type="number" id="vocabInput" min="10" max="100">
+                    </div>
+                </label>
+                <button id="applyBtn">Apply</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

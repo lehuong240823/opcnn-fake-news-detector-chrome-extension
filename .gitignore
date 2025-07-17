@@ -1,0 +1,8 @@
+# Private keys
+*.pem
+*.crx
+
+# Node or Webpack build
+node_modules/    
+.cache/       
+.parcel-cache/

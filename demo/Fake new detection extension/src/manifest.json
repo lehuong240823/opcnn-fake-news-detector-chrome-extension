@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Eye of Ra: Fake News Detector",
+  "version": "1.0",
+  "description": "A Chrome Extension to detect potential fake news in highlighted text using a simulated TensorFlow model.",
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_icon": "images/logo.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "src/worker/service_worker.js",
+    "type": "module"
+  },
+  "host_permissions": [
+    "file://*/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/logo.png",
+        "model/tfjs_hyperopt_model/*",
+        "src/popup.html",
+        "src/popup.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
