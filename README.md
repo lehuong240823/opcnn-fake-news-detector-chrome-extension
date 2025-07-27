@@ -1,6 +1,9 @@
 # opcnn-fake-news-detector-chrome-extension
 Eye of Ra: A Chrome Extension for Fake News Detection using OPCNN-FAKE
 
+## Benchmark 
+Achieved Accuracy of 0.9867, Precision of 0.9843, and Recall of 0.9877 on the test set.
+
 ## About dataset
 The dataset use to train the model is ISOT Fake News Dataset which collected from Kaggle. You can find out more about the dataset at here: https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets.
 
@@ -18,4 +21,7 @@ This repository contains 3 folders: demo, models and notebooks. Demo contains so
 ## Installation
 
 ## Usage
-1. Access
+1. Access a news website.
+2. Highlight the news content you want to analyze.
+3. Right-click to open the context menu and select "Analyze for Fake News" from the extension options.
+4.  A popup window will appear displaying the analysis results.
